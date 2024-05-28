@@ -14,7 +14,6 @@ sharp("Ai.svg").resize(150, 150).png().toFile("./src-tauri/icons/Square150x150Lo
 sharp("Ai.svg").resize(284, 284).png().toFile("./src-tauri/icons/Square284x284Logo.png")
 sharp("Ai.svg").resize(310, 310).png().toFile("./src-tauri/icons/Square310x310Logo.png")
 sharp("Ai.svg").resize(50, 50).png().toFile("./src-tauri/icons/StoreLogo.png")
-sharp("Ai.svg").resize(256, 256).toFile("./src-tauri/icons/icon.ico")
 sharp("Ai.svg").resize(1024, 1024).toFile("./src-tauri/icons/icon.icns")
 
 
