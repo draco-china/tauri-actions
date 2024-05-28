@@ -58,28 +58,28 @@ jobs:
       - name: install frontend dependencies
         run: pnpm install # change this to npm, pnpm or bun depending on which one you use.
 
-      - name: Restore build output
-        uses: actions/cache@v4
-        with:
-          path: ./out
-          key: build-${{ github.sha }}
-          restore-keys: |
-            build-${{ github.sha }}
-            build-
+      # - name: Restore build output
+      #   uses: actions/cache@v4
+      #   with:
+      #     path: ./out
+      #     key: build-${{ github.sha }}
+      #     restore-keys: |
+      #       build-${{ github.sha }}
+      #       build-
 
       - name: Release version
         run: node replace.js
 
-      # - uses: tauri-apps/tauri-action@v0
-      #   if: ${{ matrix.app != 'android'  && matrix.app != 'ios' }}
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-      #   with:
-      #     releaseId: ${{ github.event.release.id }}
-      #     updaterJsonPreferNsis: true
-      #     updaterJsonKeepUniversal: true
-      #     tauriScript: pnpm tauri
-      #     args: ${{ matrix.args }}
+      - uses: tauri-apps/tauri-action@v0
+        if: ${{ matrix.app != 'android'  && matrix.app != 'ios' }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+        with:
+          releaseId: ${{ github.event.release.id }}
+          updaterJsonPreferNsis: true
+          updaterJsonKeepUniversal: true
+          tauriScript: pnpm tauri
+          args: ${{ matrix.args }}
 
       - name: Set up Java JDK
         if: matrix.app == 'android'
