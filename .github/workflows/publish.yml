@@ -129,8 +129,10 @@ jobs:
           echo "storePassword=ai-display-keystore" >> ./src-tauri/gen/android/key.properties
           # Copy the keystore file to the android app folder
           cp ./.github/certificates/android/keystore.jks ./src-tauri/gen/android/app/keystore.jks
-          # 已经手动修改不再需要
-          # bash ./.github/certificates/android/singing.sh
+          bash ./.github/certificates/android/singing.sh
+          cp ./.github/certificates/android/code/MainActivity.kt ./src-tauri/gen/android/app/src/main/java/com/display/app/MainActivity.kt
+          cp ./.github/certificates/android/code/themes.xml ./src-tauri/gen/android/app/src/main/res/values/themes.xml
+          cp ./.github/certificates/android/code/themes.xml ./src-tauri/gen/android/app/src/main/res/values-night/themes.xml
 
       - name: Build Tauri android
         if: matrix.app == 'android'
@@ -144,9 +146,9 @@ jobs:
           version=$(cat package.json | jq -r '.version')
           mkdir -p ./release
           cp -r ./src-tauri/gen/android/app/build/outputs/apk/universal/release/*.apk ./release/$name-${{ matrix.target || 'universal' }}-$version.apk
-          cp -r ./src-tauri/gen/android/app/build/outputs/bundle/universalRelease/*.aab ./release/$name${{ matrix.target|| 'universal' }}-$version.aab
-          echo "APK_PATH=./release/$name-$version.apk" >> $GITHUB_ENV
-          echo "AAB_PATH=./release/$name-$version.aab" >> $GITHUB_ENV
+          cp -r ./src-tauri/gen/android/app/build/outputs/bundle/universalRelease/*.aab ./release/$name-${{ matrix.target|| 'universal' }}-$version.aab
+          echo "APK_PATH=./release/$name-${{ matrix.target || 'universal' }}-$version.apk" >> $GITHUB_ENV
+          echo "AAB_PATH=./release/$name-${{ matrix.target|| 'universal' }}-$version.aab" >> $GITHUB_ENV
 
       - name: Upload release
         if: matrix.app == 'android'
@@ -156,5 +158,6 @@ jobs:
           token: ${{ secrets.GH_TOKEN }}
           files: |
             ${{ env.APK_PATH }}
+            ${{ env.AAB_PATH }}
 
 
