@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "identifier": "com.display.ai",
   "build": {
-    "frontendDist": "out"
+    "frontendDist": "../out"
   },
   "app": {
     "windows": [
