@@ -123,6 +123,7 @@ jobs:
         if: matrix.app == 'android'
         run: |
           pnpm tauri android init
+          # 配置证书
           echo "keyAlias=keystore" >> ./src-tauri/gen/android/key.properties
           echo "keyPassword=ai-display-keystore" >> ./src-tauri/gen/android/key.properties
           echo "storeFile=keystore.jks" >> ./src-tauri/gen/android/key.properties
@@ -130,6 +131,7 @@ jobs:
           # Copy the keystore file to the android app folder
           cp ./.github/certificates/android/keystore.jks ./src-tauri/gen/android/app/keystore.jks
           bash ./.github/certificates/android/singing.sh
+          # 安卓全屏隐藏 statusBarColor
           cp ./.github/certificates/android/code/MainActivity.kt ./src-tauri/gen/android/app/src/main/java/com/display/app/MainActivity.kt
           cp ./.github/certificates/android/code/themes.xml ./src-tauri/gen/android/app/src/main/res/values/themes.xml
           cp ./.github/certificates/android/code/themes.xml ./src-tauri/gen/android/app/src/main/res/values-night/themes.xml
