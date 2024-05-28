@@ -5,7 +5,7 @@
 function MyWebSocket(url,onmessageCallBack){
 	this.socketUrl=url;//websocket连接url
 	this.onmessageCallBack = onmessageCallBack;//收到消息回调函数
-	this.socketUrl=this.socketUrl.replace("https","ws").replace("http","ws");
+	this.socketUrl=this.socketUrl.replace("https","wss").replace("http","ws");
 	this.socket=null; //websocket连接对象
 	var so = this;
 	this.status = false;
