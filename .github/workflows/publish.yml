@@ -150,14 +150,13 @@ jobs:
           version=$(jq -r '.version' package.json)
           echo "::set-output name=name::$name"
           echo "::set-output name=version::$version"
-          echo "::set-output name=app_name::$name_$version_${{ matrix.target || 'universal' }}"
 
       - name: Copy release files and rename
         if: matrix.app == 'android'
         run: |
           mkdir -p ./release
-          cp -r ./src-tauri/gen/android/app/build/outputs/apk/universal/release/*.apk ./release/${{ steps.get-package-info.app_name }}.apk
-          cp -r ./src-tauri/gen/android/app/build/outputs/bundle/universalRelease/*.aab ./release/${{ steps.get-package-info.app_name }}.aab
+          cp -r ./src-tauri/gen/android/app/build/outputs/apk/universal/release/*.apk ./release/${{ steps.get-package-info.name }}_${{ steps.get-package-info.version }}_${{ matrix.target || 'universal' }}.apk
+          cp -r ./src-tauri/gen/android/app/build/outputs/bundle/universalRelease/*.aab ./release/${{ steps.get-package-info.name }}_${{ steps.get-package-info.version }}_${{ matrix.target || 'universal' }}.aab
 
       - name: Upload release apk
         if: matrix.app == 'android'
@@ -165,7 +164,7 @@ jobs:
         with:
           id: ${{ github.event.release.id }}
           token: ${{ secrets.GH_TOKEN }}
-          files: ./release/${{ steps.get-package-info.app_name }}.apk
+          files: ./release/${{ steps.get-package-info.name }}_${{ steps.get-package-info.version }}_${{ matrix.target || 'universal' }}.apk
 
       - name: Upload release apk
         if: matrix.app == 'android' && matrix.target == ''
@@ -173,4 +172,4 @@ jobs:
         with:
           id: ${{ github.event.release.id }}
           token: ${{ secrets.GH_TOKEN }}
-          files: ./release/${{ steps.get-package-info.app_name }}.aab
+          files: ./release/${{ steps.get-package-info.name }}_${{ steps.get-package-info.version }}_${{ matrix.target || 'universal' }}.aab
