@@ -7,6 +7,10 @@ settings:
 importers:
 
   .:
+    dependencies:
+      '@tauri-apps/plugin-websocket':
+        specifier: 2.0.0-beta.3
+        version: 2.0.0-beta.3
     devDependencies:
       '@tauri-apps/cli':
         specifier: ^2.0.0-beta.18
@@ -136,6 +140,10 @@ packages:
     cpu: [x64]
     os: [win32]
 
+  '@tauri-apps/api@2.0.0-beta.11':
+    resolution: {integrity: sha512-wJRY+fBUm3KpqZDHMIz5HRv+1vlnvRJ/dFxiyY3NlINTx2qXqDou5qWYcP1CuZXsd39InWVPV3FAZvno/kGCkA==}
+    engines: {node: '>= 18', npm: '>= 6.6.0', yarn: '>= 1.19.1'}
+
   '@tauri-apps/cli-darwin-arm64@2.0.0-beta.18':
     resolution: {integrity: sha512-Jq49VH/UpHVkWw+qqymY1xWLMu7FF+4r5C4qVZvgm5Mkgulgf63jyCkrejdlXvOJQNm5MAHTyn2hnX6ZDeWVxA==}
     engines: {node: '>= 10'}
@@ -200,6 +208,9 @@ packages:
     resolution: {integrity: sha512-VcuvIyKsGVygUX1sIZmyCinzfudhcgzkFY8c9UBTbpf2/dtJADqqKEirsTXa/XPvWK64weyHFpr+i1uL7zopsg==}
     engines: {node: '>= 10'}
     hasBin: true
+
+  '@tauri-apps/plugin-websocket@2.0.0-beta.3':
+    resolution: {integrity: sha512-DBFNtS3UqCVWqOU1pUckQD8zdMnbJ54rH7vFJOeN4w0JKKu+Luooj8d89HWTV8xeEm3pyNtlCEebXJIQrobBeg==}
 
   ansi-escapes@4.3.2:
     resolution: {integrity: sha512-gKXj5ALrKWQLsYG9jlTRmR/xKluxHV+Z9QEwNIgCfM1/uwPMCuzVVnh5mwTd+OuBZcwSIMbqssNWRm1lE51QaQ==}
@@ -552,6 +563,8 @@ snapshots:
   '@img/sharp-win32-x64@0.33.4':
     optional: true
 
+  '@tauri-apps/api@2.0.0-beta.11': {}
+
   '@tauri-apps/cli-darwin-arm64@2.0.0-beta.18':
     optional: true
 
@@ -594,6 +607,10 @@ snapshots:
       '@tauri-apps/cli-win32-arm64-msvc': 2.0.0-beta.18
       '@tauri-apps/cli-win32-ia32-msvc': 2.0.0-beta.18
       '@tauri-apps/cli-win32-x64-msvc': 2.0.0-beta.18
+
+  '@tauri-apps/plugin-websocket@2.0.0-beta.3':
+    dependencies:
+      '@tauri-apps/api': 2.0.0-beta.11
 
   ansi-escapes@4.3.2:
     dependencies:
